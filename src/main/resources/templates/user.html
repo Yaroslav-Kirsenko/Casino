@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Users</title>
+    <style>
+        table {
+            border: 1px solid black;
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 20px;
+            padding: 5px;
+        }
+
+        th, td {
+
+            border: 1px solid black;
+        }
+
+        th {
+            background-color: #0077A8;
+            color: white;
+
+        }
+
+        td {
+            padding-left: 5px;
+
+        }
+
+
+    </style>
+
+
+</head>
+<body>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Year</th>
+
+    </tr>
+    <tr  th:each="users : ${user}">
+        <td  th:text="${users.id}"></td>
+        <td  th:text="${users.username}"></td>
+        <td  th:text="${users.amail}"></td>
+        <td  th:text="${users.password}"></td>
+        <td  th:text="${users.year}"></td>
+    </tr>
+
+</table>
+</body>
+</html>

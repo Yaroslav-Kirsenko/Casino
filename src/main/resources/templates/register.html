@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <link rel="stylesheet" th:href="@{/index.css}">
+</head>
+<body>
+
+<div class="container">
+    <div class="image">
+        <div class ="form-box">
+            <div class="form">
+            <h2>Registration</h2>
+            <form th:action="@{/registration}" method="post" role="form" th:object="${user}">
+
+                <div class="input-box">
+                    <input th:field="*{username}" type="text" id="username" name="name" required>
+                    <label for="username">Name</label>
+                </div>
+
+                <div class="input-box">
+                    <input th:field="*{amail}" type="text" id="amail" name="amail" required>
+                    <label for="amail">Email</label>
+                </div>
+
+                <div class="input-box">
+                    <input th:field="*{password}" type="text" id="password" name="password" required>
+                    <label for="password">Password</label>
+                </div>
+
+                <div class="input-box">
+                    <input th:field="*{year}" type="text" id="year" name="year" required>
+                    <label for="year">Year</label>
+                </div>
+
+                <div>
+                    <div class="group">
+                        <!--                        <a href="#">Forgot Password</a>-->
+                        <a href="/login">Sing In</a>
+                    </div>
+                    <button type="submit" class="btn">Sing up</button>
+                </div>
+    </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
