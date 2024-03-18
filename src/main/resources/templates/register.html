@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Page</title>
-    <link rel="stylesheet" th:href="@{/index.css}">
+    <link rel="stylesheet" th:href="@{/style/loginRegister.css}">
 </head>
 <body>
 
@@ -13,7 +13,7 @@
         <div class ="form-box">
             <div class="form">
             <h2>Registration</h2>
-            <form th:action="@{/registration}" method="post" role="form" th:object="${user}">
+            <form th:action="@{/register}" method="post" role="form" th:object="${user}">
 
                 <div class="input-box">
                     <input th:field="*{username}" type="text" id="username" name="name" required>
@@ -21,8 +21,8 @@
                 </div>
 
                 <div class="input-box">
-                    <input th:field="*{amail}" type="text" id="amail" name="amail" required>
-                    <label for="amail">Email</label>
+                    <input th:field="*{email}" type="text" id="email" name="amail" required>
+                    <label for="email">Email</label>
                 </div>
 
                 <div class="input-box">

@@ -35,16 +35,13 @@ body {
 }
 .video-bg__content {
     position: absolute;
-    top: 20px; /* Отступ сверху */
+    top: 50%; /* Отступ сверху */
     left: 50%;
-    transform: translateX(-50%); /* Центрирование по горизонтали */
+    transform: translate(-50%, -50%); /* Центрирование по горизонтали и вертикали */
     z-index: 2;
     color: #ffffff;
     font-size: 50px;
     text-align: center;
-    /*z-index: 2;*/
-    /*color: #ffffff;*/
-    /*font-size: 50px;*/
 }
 .video-bg__content a {
     display: inline-block;

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import jakarta.servlet.http.HttpSession;
 
 
 @Controller
@@ -38,7 +39,7 @@ public class UserController {
     public String saveUser(@ModelAttribute("user") User user, Model model) {
         userRepository.save(user);
         model.addAttribute("message", "Submitted Successfully");
-        return "register";
+        return "redirect:/login";
     }
 
     //  LOGIN PANEL
@@ -48,9 +49,10 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String loginUser(@RequestParam String username, @RequestParam String password, Model model) {
+    public String loginUser(@RequestParam String username, @RequestParam String password, Model model, HttpSession session) {
         User user = userService.authenticate(username, password);
         if (user != null) {
+            session.setAttribute("user", user);
             model.addAttribute("message", "User successfully authenticated");
             return "redirect:/main";
         } else {
@@ -58,4 +60,5 @@ public class UserController {
             return "login";
         }
     }
+
 }

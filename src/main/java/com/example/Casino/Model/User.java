@@ -19,8 +19,8 @@ public class User {
     @Column(name = "year")
     private Long year;
 
-    @Column(name = "amail")
-    private String amail;
+    @Column(name = "email")
+    private String email;
 
 
     public Long getId() {
@@ -54,11 +54,11 @@ public class User {
     public void setYear(Long year) {
         this.year = year;
     }
-    public String getAmail() {
-        return amail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAmail(String amail) {
-        this.amail = amail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

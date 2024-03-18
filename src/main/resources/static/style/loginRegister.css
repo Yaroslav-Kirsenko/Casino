@@ -5,6 +5,13 @@ body{
     align-items: center;
     min-height: 100vh;
     overflow: hidden;
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    /*min-height: 100vh;*/
+    /*overflow: hidden;*/
+    /*background-image: url('/static/img/costi.jpg'); !* Add this line *!*/
+    /*background-size: cover;*/
 }
 
 .container{
