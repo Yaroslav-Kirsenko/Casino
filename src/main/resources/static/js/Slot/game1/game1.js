@@ -3,14 +3,14 @@
     "use strict";
 
     const items = [
-        { name: "static/style/img/apple.png", weight: 6, value: 15 },
-        { name: "static/style/img/cherry.png", weight: 4, value: 50 },
-        { name: "static/style/img/grape.png", weight: 8, value: 10 },
-        { name: "static/style/img/banana.png", weight: 8, value: 10 },
-        { name: "static/style/img/lemon.png", weight: 6, value: 25 },
-        { name: "static/style/img/orange.png", weight: 8, value: 10 },
-        { name: "static/style/img/watermellon.png", weight: 6, value: 20 },
-        { name: "static/style/img/bar.png", weight: 1, value: 100 }
+        { name: "static/style/img/game1/apple.png", weight: 6, value: 15 },
+        { name: "static/style/img/game1/cherry.png", weight: 4, value: 50 },
+        { name: "static/style/img/game1/grape.png", weight: 8, value: 10 },
+        { name: "static/style/img/game1/banana.png", weight: 8, value: 10 },
+        { name: "static/style/img/game1/lemon.png", weight: 6, value: 25 },
+        { name: "static/style/img/game1/orange.png", weight: 8, value: 10 },
+        { name: "static/style/img/game1/watermellon.png", weight: 6, value: 20 },
+        { name: "static/style/img/game1/bar.png", weight: 1, value: 100 }
     ];
 
     const reels = document.querySelectorAll(".reel");
@@ -83,7 +83,7 @@
             const squaresClone = squares.cloneNode(false);
 
             const pool = [
-                { name: "static/style/img/start.png", weight: null }
+                { name: "static/style/img/game1/start.png", weight: null }
             ];
 
             if (!firstInit) {
@@ -174,6 +174,14 @@
 
         return shuffledItems;
     }
+
+    const playButton = document.querySelector("[data-play]");
+    playButton.addEventListener("click", () => {
+        playButton.disabled = true;
+        setTimeout(() => {
+            playButton.disabled = false;
+        }, 1000); // Задержка в 1000 мс (1 секунда)
+    });
 
     init();
 

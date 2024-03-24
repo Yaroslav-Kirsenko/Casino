@@ -23,6 +23,10 @@ public class User {
     private String email;
 
 
+    @Column(name = "balance")
+    private Integer balance;
+
+
     public Long getId() {
         return id;
     }
@@ -60,5 +64,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Integer getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Integer balance) {
+        this.balance = balance;
     }
 }

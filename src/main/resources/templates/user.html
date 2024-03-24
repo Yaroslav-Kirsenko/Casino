@@ -42,6 +42,7 @@
         <th>Email</th>
         <th>Password</th>
         <th>Year</th>
+        <th>Balance</th>
 
     </tr>
     <tr  th:each="users : ${user}">
@@ -50,6 +51,7 @@
         <td  th:text="${users.email}"></td>
         <td  th:text="${users.password}"></td>
         <td  th:text="${users.year}"></td>
+        <td  th:text="${users.balance}"></td>
     </tr>
 
 </table>
