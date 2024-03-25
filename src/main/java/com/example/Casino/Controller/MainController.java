@@ -34,53 +34,47 @@ public class MainController {
         return "main";
     }
 
-    @GetMapping("/game1")
+    @GetMapping("/slot1")
     public String slotGame1(Model model, HttpSession session) {
 //        if (session.getAttribute("user") == null) {
 //            return "redirect:/main";
 //        }
-        return "game1";
+        return "Game/Slot/slot1.html";
     }
 
-    @GetMapping("/game2")
+    @GetMapping("/slot2")
     public String slotGame2(Model model, HttpSession session) {
 //        if (session.getAttribute("user") == null) {
 //            return "redirect:/main";
 //        }
-        return "game2";
+        return "Game/Slot/slot2.html";
     }
 
-    @GetMapping("/game3")
+    @GetMapping("/slot3")
     public String slotGame3(Model model, HttpSession session) {
 //        if (session.getAttribute("user") == null) {
 //            return "redirect:/main";
 //        }
-        return "game3";
+        return "Game/Slot/slot3.html";
     }
 
-    @GetMapping("/roulette")
+    @GetMapping("/roulette1")
     public String slotRoullete(Model model, HttpSession session) {
 //        if (session.getAttribute("user") == null) {
 //            return "redirect:/main";
 //        }
-        return "roulette";
+        return "Game/Roulette/roulette1.html";
     }
-    @GetMapping("/roulette1")
+    @GetMapping("/roulette2")
     public String slotRoullete1(Model model, HttpSession session) {
 //        if (session.getAttribute("user") == null) {
 //            return "redirect:/main";
 //        }
-        return "roulette1";
+        return "Game/Roulette/roulette2.html";
     }
 
 
-
-
-
-
-
-
-//    @PostMapping("/updateBalance")
+    //    @PostMapping("/updateBalance")
 //    public ResponseEntity<String> updateBalance(@RequestParam String username, @RequestParam int amount) {
 //        try {
 //            User user = userRepository.findByUsername(username);

@@ -26,13 +26,13 @@ public class UserController {
     //  START POINT
     @GetMapping("/")
     public String index() {
-        return "index";
+        return "index.html";
     }
 
     //  REGISTRATION PANEL
     @GetMapping("/register")
     public String getRegPage(@ModelAttribute("user") User user) {
-        return "register";
+        return "/main/resources/templates/LoginRegister/register.html";
     }
 
     @PostMapping("/register")
@@ -45,7 +45,7 @@ public class UserController {
     //  LOGIN PANEL
     @GetMapping("/login")
     public String getLoginPage() {
-        return "login";
+        return "LoginRegister/login.html";
     }
 
     @PostMapping("/login")
@@ -57,7 +57,7 @@ public class UserController {
             return "redirect:/main";
         } else {
             model.addAttribute("message", "Authentication failed");
-            return "login";
+            return "LoginRegister/login.html";
         }
     }
 

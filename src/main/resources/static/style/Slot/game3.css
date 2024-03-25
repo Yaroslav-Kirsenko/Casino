@@ -21,7 +21,7 @@ body {
 #app {
     width: 100%;
     height: 100%;
-    background-image: url("img/game1/bg.png");
+    background-image: url("../img/img/game1/bg.png");
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -32,7 +32,7 @@ body {
 
 .reels-container {
     display: flex;
-    background-image: url("img/game1/frame.png");
+    background-image: url("../img/img/game1/frame.png");
     background-size: 100% 100%;
     background-repeat: no-repeat;
     justify-content: center;
@@ -80,7 +80,7 @@ button {
 }
 
 #start {
-    background-image: url("img/game1/play_button_0.png");
+    background-image: url("../img/img/game1/play_button_0.png");
     background-size: 110% 110%;
     background-repeat: no-repeat;
     width: 60%;
