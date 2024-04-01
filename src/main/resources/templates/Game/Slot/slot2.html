@@ -3,34 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slot Machine</title>
+    <title>Слот-машина с рандомными картинками</title>
     <link rel="stylesheet" href="/style/Slot/game2.css">
 </head>
 <body>
-<div class="slot-machine">
-    <div class="row">
-        <div class="slot"></div>
-        <div class="slot"></div>
-        <div class="slot"></div>
-        <div class="slot"></div>
-    </div>
-    <div class="row">
-        <div class="slot"></div>
-        <div class="slot"></div>
-        <div class="slot"></div>
-        <div class="slot"></div>
-    </div>
-    <div class="row">
-        <div class="slot"></div>
-        <div class="slot"></div>
-        <div class="slot"></div>
-        <div class="slot"></div>
-    </div>
-    <button id="spinBtn">Spin</button>
+<div class="slots">
+    <div class="reel"></div>
+    <div class="reel"></div>
+    <div class="reel"></div>
 </div>
 
+<div id="debug" class="debug"></div>
 
-<!-- Скрипт для вашей игры -->
-<script src="../../static/js/Slot/slot2/slot2.js"></script>
+<!--<img style="position:fixed; left: 0; top: 0; height: 100vh; width: auto;"  src="https://assets.codepen.io/439000/slotreel.webp">-->
+
+<button id="startButton">Spin</button>
 </body>
+<script src="../../static/js/Slot/slot2/slot2.js"></script>
 </html>

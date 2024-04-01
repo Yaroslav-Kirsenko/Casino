@@ -31,7 +31,7 @@ public class AdminUserController {
     //  LOGIN PANEL
     @GetMapping("/login-admin")
     public String getLoginPage() {
-        return "/main/resources/templates/LoginRegister/login-admin.html";
+        return "LoginRegister/login-admin.html";
     }
 
     @PostMapping("/login-admin")
@@ -43,7 +43,7 @@ public class AdminUserController {
             return "redirect:/users";
         } else {
             model.addAttribute("message", "Authentication failed");
-            return "/main/resources/templates/LoginRegister/login-admin.html";
+            return "LoginRegister/login-admin.html";
         }
     }
 
@@ -55,7 +55,7 @@ public class AdminUserController {
         }
         List<User> listOfUsers = userRepository.findAll();
         model.addAttribute("user", listOfUsers);
-        return "/main/resources/templates/LoginRegister/user.html";
+        return "LoginRegister/user.html";
     }
 }
 

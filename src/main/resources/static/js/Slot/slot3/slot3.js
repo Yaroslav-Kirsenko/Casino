@@ -8,8 +8,8 @@
         { name: "static/style/img/game1/banana.png", weight: 8, value: 10 },
         { name: "static/style/img/game1/lemon.png", weight: 6, value: 25 },
         { name: "static/style/img/game1/orange.png", weight: 8, value: 10 },
-        { name: "static/style/img/game1/watermellon.png", weight: 6, value: 20 },
-        { name: "static/style/img/game1/bar.png", weight: 1, value:  50}
+        { name: "static/style/img/game1/watermelon.png", weight: 6, value: 20 },
+        { name: "static/style/img/game1/bar.png", weight: 1, value: 50 }
     ];
 
     const reels = document.querySelectorAll(".reel");
@@ -37,7 +37,7 @@
     });
 
     async function spin() {
-        init(false, 1, 1);
+        init(false, 4, 1); // Устанавливаем 4 группы элементов в каждом столбце
         for (let i = 0; i < reels.length; i++) {
             const squares = reels[i].querySelector(".squares");
             const duration = parseInt(squares.style.transitionDuration);
@@ -93,7 +93,7 @@
                     arr.push(...items);
                 }
 
-                const shuffledItems = shuffle(arr); // Shuffle items to get random order
+                const shuffledItems = shuffle(arr); // Перемешиваем элементы, чтобы получить случайный порядок
 
                 pool.push(...shuffledItems);
 
@@ -113,7 +113,7 @@
                     function () {
                         this.querySelectorAll(".box").forEach((box, index) => {
                             box.style.filter = "blur(0)";
-                            // Generate a random index to select a different image
+                            // Генерируем случайный индекс для выбора другого изображения
                             const randomIndex = Math.floor(Math.random() * items.length);
                             box.querySelector("img").src = items[randomIndex].name;
                         });
@@ -125,14 +125,14 @@
             lastItems[i] = pool[pool.length - 1];
 
             for (let j = pool.length - 1; j >= 0; j--) {
-                for (let k = 0; k < 4; k++) {
+                for (let k = 0; k < 3; k++) { // Изменил на 3
                     const box = document.createElement("div");
                     box.classList.add("box");
                     box.style.width = reel.clientWidth + "px";
-                    box.style.height = reel.clientHeight / 4 + "px";
+                    box.style.height = reel.clientHeight / 4 + "px"; // Изменил на / 3
 
                     const img = document.createElement("img");
-                    // Generate a random index to select a different image
+                    // Генерируем случайный индекс для выбора другого изображения
                     const randomIndex = Math.floor(Math.random() * items.length);
                     img.src = items[randomIndex].name;
                     box.appendChild(img);
@@ -142,7 +142,7 @@
             }
 
             squaresClone.style.transitionDuration = `${duration > 0 ? duration : 1}s`;
-            squaresClone.style.transform = `translateY(-${(reel.clientHeight / 4) * (pool.length * 4 - 1)}px)`;
+            squaresClone.style.transform = `translateY(-${(reel.clientHeight / 3) * (pool.length * 3 - 1)}px)`; // Изменил на / 3
             reel.replaceChild(squaresClone, squares);
         }
     }
@@ -151,7 +151,6 @@
         const totalWeight = remainingWeights.reduce((acc, weight) => acc + weight, 0);
         const randomNumber = Math.random() * totalWeight;
 
-        let cumulative
         let cumulativeProbability = 0;
         for (let i = 0; i < remainingItems.length; i++) {
             cumulativeProbability += remainingWeights[i] / totalWeight;
@@ -193,26 +192,26 @@
 
     init();
 
-})();
-function checkWinCombination() {
-    if (
-        (lastItems[0].name === lastItems[1].name &&
-            lastItems[1].name === lastItems[2].name) || // Проверка по горизонтали
-        (lastItems[0].name === lastItems[3].name &&
-            lastItems[3].name === lastItems[6].name) || // Проверка по вертикали
-        (lastItems[0].name === lastItems[4].name &&
-            lastItems[4].name === lastItems[8].name) || // Проверка диагонали слева направо
-        (lastItems[2].name === lastItems[4].name &&
-            lastItems[4].name === lastItems[6].name) // Проверка диагонали справа налево
-    ) {
-        // Здесь можно добавить действия при выигрыше
-        setTimeout(() => {
-            intervalBlink = setInterval(blinkLine, 500);
-        }, 1000);
+    function checkWinCombination() {
+        if (
+            (lastItems[0].name === lastItems[1].name &&
+                lastItems[1].name === lastItems[2].name) || // Проверка по горизонтали
+            (lastItems[0].name === lastItems[3].name &&
+                lastItems[3].name === lastItems[6].name) || // Проверка по вертикали
+            (lastItems[0].name === lastItems[4].name &&
+                lastItems[4].name === lastItems[8].name) || // Проверка диагонали слева направо
+            (lastItems[2].name === lastItems[4].name &&
+                lastItems[4].name === lastItems[6].name) // Проверка диагонали справа налево
+        ) {
+            // Здесь можно добавить действия при выигрыше
+            setTimeout(() => {
+                intervalBlink = setInterval(blinkLine, 500);
+            }, 1000);
 
-        valor = lastItems[0].value; // Предположим, что значение выигрыша берется из первой ячейки
-        saldo += valor;
-    } else {
-        saldo -= valor;
+            valor = lastItems[0].value; // Предположим, что значение выигрыша берется из первой ячейки
+            saldo += valor;
+        } else {
+            saldo -= valor;
+        }
     }
-}
+})();

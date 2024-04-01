@@ -9,6 +9,40 @@ body {
     overflow-y: auto; /* Добавлено для вертикальной полосы прокрутки */
 }
 
+.icons-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1; /* Поверх слайдера */
+}
+
+.profile-icon {
+    display: block;      /*блочить*/
+    position: relative; /* Оставляем relative */
+    top: 170px; /* Увеличиваем отступ от верхнего края */
+    left: 20px; /* Изменяем отступ слева */
+    width: 50px; /* Уменьшаем ширину иконки */
+    height: auto; /* Автоматическая высота */
+    z-index: 1; /* Поверх слайдера */
+}
+.profile-icon img {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+}
+
+.profile-text {
+    color: #fff;
+    font-size: 14px;
+    display: block;      /*блочить*/
+    position: relative; /* Оставляем relative */
+    top: 145px; /* Увеличиваем отступ от верхнего края */
+    left: 70px; /* Изменяем отступ слева */
+    width: 50px; /* Уменьшаем ширину иконки */
+    height: auto; /* Автоматическая высота */
+    z-index: 1; /* Поверх слайдера */
+}
+
 .logo {
     position: fixed;
     top: 5px;
@@ -224,4 +258,27 @@ body {
     left: 50%;
     transform: translateX(-50%);
     z-index: 1;
+}
+
+.logout-container {
+    position: fixed;
+    top: 20px;
+    right: 10px;
+    z-index: 100; /* Чтобы кнопка была поверх других элементов */
+}
+
+.logout-btn {
+    padding: 10px 20px;
+    background-color: #ffffff; /* Цвет кнопки по умолчанию */
+    color: black; /* Цвет текста */
+    border: none;
+    border-radius: 5px;
+    text-decoration: none; /* Убираем подчеркивание ссылки */
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Анимация изменения цвета */
+}
+
+.logout-btn:hover {
+    background-color: red; /* Цвет кнопки при наведении */
 }

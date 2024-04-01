@@ -29,6 +29,27 @@
     const winImage = document.getElementById("winimage");
     const startButton = document.querySelector("#start");
 
+    async function updateBalance(username, amount) {
+        try {
+            const response = await fetch('/slot1', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: username,
+                    amount: amount
+                })
+            });
+
+            const data = await response.json();
+            console.log(data); // Опционально: выводите ответ сервера для отладки
+        } catch (error) {
+            console.error('Error updating balance:', error);
+        }
+    }
+
+
     startButton.addEventListener("click", async function () {
         valor = 10;
         clearInterval(intervalBlink);
@@ -51,14 +72,14 @@
                 intervalBlink = setInterval(blinkLine, 500);
             }, 1000);
 
-            valor = lastItems[0].value;
-            saldo += valor;
+            const username = ''; // Здесь укажите логику для получения имени пользователя (например, из формы или из хранилища)
+            const amount = lastItems[0].value;
+            await updateBalance(username, amount);
         } else {
-            saldo -= valor;
+            const username = ''; // Здесь укажите логику для получения имени пользователя (например, из формы или из хранилища)
+            const amount = -10; // Здесь указываете отрицательное значение, если игрок проиграл
+            await updateBalance(username, amount);
         }
-
-        saldoElement.textContent = `Saldo: $${saldo}`;
-        valorElement.textContent = `Valor: $${valor}`;
     }
 
     function blinkLine() {

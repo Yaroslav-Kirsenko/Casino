@@ -1,15 +1,22 @@
 package com.example.Casino.Controller;
 
 
+import com.example.Casino.Model.User;
 import com.example.Casino.Repo.UserRepository;
 import com.example.Casino.Service.UserService;
 
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Map;
 
 
 @Controller
@@ -74,23 +81,27 @@ public class MainController {
     }
 
 
-    //    @PostMapping("/updateBalance")
-//    public ResponseEntity<String> updateBalance(@RequestParam String username, @RequestParam int amount) {
-//        try {
-//            User user = userRepository.findByUsername(username);
-//            if (user == null) {
-//                return ResponseEntity.badRequest().body("Player not found");
-//            }
-//
-//            int currentBalance = user.getBalance();
-//            int updatedBalance = currentBalance + amount;
-//            user.setBalance(updatedBalance);
-//            userRepository.save(user);
-//
-//            return ResponseEntity.ok("Balance updated successfully");
-//        } catch (Exception e) {
-//            return ResponseEntity.status(500).body("Error updating balance");
-//        }
-//    }
+    @PostMapping("/slot1")
+    public ResponseEntity<String> updateBalance(@RequestBody Map<String, Object> payload) {
+        try {
+            String username = (String) payload.get("username");
+            int amount = (int) payload.get("balance");
+
+            User user = userRepository.findByUsername(username);
+            if (user == null) {
+                return ResponseEntity.badRequest().body("Player not found");
+            }
+
+            int currentBalance = user.getBalance();
+            int updatedBalance = currentBalance + amount;
+            user.setBalance(updatedBalance);
+            userRepository.save(user);
+
+            return ResponseEntity.ok("Balance updated successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error updating balance");
+        }
+    }
+
 
 }

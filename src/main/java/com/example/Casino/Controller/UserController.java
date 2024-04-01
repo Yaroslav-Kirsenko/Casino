@@ -32,7 +32,7 @@ public class UserController {
     //  REGISTRATION PANEL
     @GetMapping("/register")
     public String getRegPage(@ModelAttribute("user") User user) {
-        return "/main/resources/templates/LoginRegister/register.html";
+        return "LoginRegister/register.html";
     }
 
     @PostMapping("/register")
