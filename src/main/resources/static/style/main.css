@@ -1,12 +1,49 @@
 
+/*body {*/
+/*    display: flex;*/
+/*    background: #0c1022;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    min-height: 100vh;*/
+/*    overflow: hidden;*/
+/*    overflow-y: auto; !* Добавлено для вертикальной полосы прокрутки *!*/
+/*}*/
+
+html,
 body {
-    display: flex;
+    position: relative;
+    height: 100%;
+}
+
+body {
     background: #0c1022;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+    margin: 0;
+    padding: 0;
+}
+
+.swiper {
+    top: 5px;
+    width: 70%;
+    height: 35%;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    overflow: hidden;
-    overflow-y: auto; /* Добавлено для вертикальной полосы прокрутки */
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .icons-container {
@@ -51,58 +88,6 @@ body {
     height: auto; /* Автоматическая высота */
     z-index: 1; /* Поверх слайдера */
 }
-
-.slider-container {
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 900px;
-    height: 250px;
-    overflow: hidden;
-    margin-top: 20px;
-}
-
-.slides {
-    display: flex;
-    height: 100%;
-}
-
-.slide {
-    flex: 0 0 auto;
-    width: 100%;
-    transition: transform 0.5s ease;
-}
-
-.slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.prev-btn, .next-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 20px;
-    z-index: 1;
-}
-
-.prev-btn {
-    left: 0;
-}
-
-.next-btn {
-    right: 0;
-}
-
-
 .game-container {
     display: flex;
     justify-content: center;

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <title>Jackpot Land Casino</title>
 </head>
 <body>
@@ -15,24 +16,24 @@
     <img src="/video/img/profile.png" alt="Profile Icon">
 </a>
     <a class ="profile-text" href="/profile">Profile</a>
+
+    <a class="profile-icon" href="/crash1">
+        <img src="/video/img/crash.png" alt="Profile Icon">
+    </a>
+    <a class ="profile-text" href="/crash1">Crash</a>
 </div>
 
-<div class="slider-container">
-    <div class="slides">
-        <div class="slide">
-            <img src="/video/img/slot.png" alt="Slide 1">
-        </div>
-        <div class="slide">
-            <img src="/video/img/BJ.png" alt="Slide 2">
-        </div>
-        <div class="slide">
-            <img src="/video/img/ruletka.png" alt="Slide 3">
-        </div>
+
+
+<div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide"> <img src="/video/img/slot.png" alt="Slide 1"></div>
+        <div class="swiper-slide"><img src="/video/img/BJ.png" alt="Slide 2"></div>
+        <div class="swiper-slide"><img src="/video/img/ruletka.png" alt="Slide 3"></div>
+        <div class="swiper-slide"><img src="/video/img/crash.png" alt="Slide 4"></div>
     </div>
-    <button class="prev-btn"></button>
-    <button class="next-btn"></button>
+    <div class="swiper-pagination"></div>
 </div>
-
 
 <div class="game-container top">
     <h2>Slot Games</h2>
@@ -103,12 +104,21 @@
     <!-- Add more games as needed -->
 </div>
 
-
-
 <div class="logout-container">
     <a class="logout-btn" href="/">Log Out</a>
 </div>
-<script src="../static/js/main.js"></script>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<!-- Initialize Swiper -->
+<script>
+    var swiper = new Swiper(".mySwiper", {
+        pagination: {
+            el: ".swiper-pagination",
+        },
+    });
+</script>
 
 </body>
 </html>
