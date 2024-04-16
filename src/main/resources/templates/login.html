@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Page</title>
+  <link rel="stylesheet" href="/style/loginRegister.css">
+</head>
+<body>
+<div class="container">
+  <div class="image">
+    <div class ="form-box">
+      <div class="form">
+        <h2>Login</h2>
+        <form id="login-form" method="post">
+
+          <div class="input-box">
+            <input type="text" id="username" name="username" required>
+            <label for="username">Name</label>
+          </div>
+
+          <div class="input-box">
+            <input type="password" id="password" name="password" minlength="8" required>
+            <label for="password">Password</label>
+          </div>
+
+          <button type="submit" class="btn">Sign in</button>
+
+        </form>
+        <p class="white-text" text="${message}"></p>
+        <div>
+          <pre id="error-message" style="color: red;"></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  (() => {
+    document.querySelector("#login-form").onsubmit = e => {
+      e.preventDefault();
+
+      const username = document.querySelector("#username").value;
+      const password = document.querySelector("#password").value;
+
+      fetch("/auth/sign-in", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          username: username,
+          password: password
+        })
+      }).then(response => {
+        if (!response.ok) {
+          throw new Error("Login failed.");
+        }
+        return response.json();
+      }).then(data => {
+        console.log(data); // Вывод данных об авторизации в консоль (можно изменить на свой вывод)
+
+        // Сохраняем токен в локальное хранилище
+        localStorage.setItem("accessToken", data.token);
+
+        window.location.href = "/main"; // Перенаправление на страницу после успешной авторизации
+      }).catch(error => {
+        document.querySelector("#error-message").innerText = error.message;
+      });
+    };
+  })();
+
+</script>
+</body>
+</html>

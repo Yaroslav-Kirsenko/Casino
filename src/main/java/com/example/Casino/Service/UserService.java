@@ -3,7 +3,9 @@ package com.example.Casino.Service;
 import com.example.Casino.Model.Role;
 import com.example.Casino.Model.User;
 import com.example.Casino.Repo.UserRepository;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

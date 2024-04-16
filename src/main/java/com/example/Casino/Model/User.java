@@ -9,11 +9,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -43,6 +45,12 @@ public class User implements UserDetails {
 
     @Column(name = "email", unique = true, nullable = false)
     private String email;
+
+    @Column(name = "balance", nullable = false)
+    private String balance;
+
+    @Column(name = "year", nullable = false)
+    private Long year;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)

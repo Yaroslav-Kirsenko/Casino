@@ -1,4 +1,3 @@
-
 (function () {
     "use strict";
 
@@ -49,6 +48,11 @@
         }
     }
 
+    function getUsername() {
+        // Логіка отримання імені користувача з форми або з LocalStorage
+        // Наприклад, якщо ім'я користувача зберігається в полі з id="usernameInput"
+        return document.getElementById("usernameInput").value;
+    }
 
     startButton.addEventListener("click", async function () {
         valor = 10;
@@ -67,16 +71,16 @@
             await new Promise((resolve) => setTimeout(resolve, duration * 100));
         }
 
+        const username = getUsername();
+
         if (lastItems[0].name !== null && lastItems.every(item => item.name === lastItems[0].name)) {
             setTimeout(() => {
                 intervalBlink = setInterval(blinkLine, 500);
             }, 1000);
 
-            const username = ''; // Здесь укажите логику для получения имени пользователя (например, из формы или из хранилища)
             const amount = lastItems[0].value;
             await updateBalance(username, amount);
         } else {
-            const username = ''; // Здесь укажите логику для получения имени пользователя (например, из формы или из хранилища)
             const amount = -10; // Здесь указываете отрицательное значение, если игрок проиграл
             await updateBalance(username, amount);
         }
@@ -145,7 +149,8 @@
                 const box = document.createElement("div");
                 box.classList.add("box");
                 box.style.width = reel.clientWidth + "px";
-                box.style.height = reel.clientHeight + "px";
+                box.style.height = reel
+                    .clientHeight + "px";
 
                 const img = document.createElement("img");
                 img.src = pool[j].name;

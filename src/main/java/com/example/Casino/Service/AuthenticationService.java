@@ -5,7 +5,9 @@ import com.example.Casino.DTO.SignInRequest;
 import com.example.Casino.DTO.SignUpRequest;
 import com.example.Casino.Model.Role;
 import com.example.Casino.Model.User;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,6 +34,8 @@ public class AuthenticationService {
                 .username(request.getUsername())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
+                .balance("0")
+                .year(request.getYear())
                 .role(Role.ROLE_USER)
                 .build();
 
@@ -48,6 +52,26 @@ public class AuthenticationService {
      * @return токен
      */
     public JwtAuthenticationResponse signIn(SignInRequest request) {
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                request.getUsername(),
+                request.getPassword()
+        ));
+
+        var user = userService
+                .userDetailsService()
+                .loadUserByUsername(request.getUsername());
+
+        var jwt = jwtService.generateToken(user);
+        return new JwtAuthenticationResponse(jwt);
+    }
+
+    /**
+     * Обнова токена
+     *
+     * @param request данные пользователя
+     * @return токен
+     */
+    public JwtAuthenticationResponse refreshToken(SignInRequest request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 request.getUsername(),
                 request.getPassword()

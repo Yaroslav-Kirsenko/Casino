@@ -1,9 +1,11 @@
 package com.example.Casino.DTO;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,4 +30,10 @@ public class SignUpRequest {
     @Schema(description = "Пароль", example = "my_1secret1_password")
     @Size(max = 255, message = "Длина пароля должна быть не более 255 символов")
     private String password;
+
+    @Schema(description = "Баланс", example = "120.50")
+    private Double balance;
+
+    @Schema(description = "Возраст", example = "20")
+    private Long year;
 }

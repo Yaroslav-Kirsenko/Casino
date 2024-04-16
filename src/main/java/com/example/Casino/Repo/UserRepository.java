@@ -1,7 +1,5 @@
 package com.example.Casino.Repo;
 
-
-
 import com.example.Casino.Model.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;

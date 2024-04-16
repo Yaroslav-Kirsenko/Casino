@@ -108,6 +108,23 @@
     <a class="logout-btn" href="/">Log Out</a>
 </div>
 
+<div class="balance-container">
+    <p>Your balance: <span id="balance">Loading...</span></p>
+</div>
+
+<div class="balance-container">
+    <p>Your id: <span id="id">Loading...</span></p>
+</div>
+
+<div class="balance-container">
+    <p>Your username: <span id="username">Loading...</span></p>
+</div>
+
+<div class="balance-container">
+    <p>Your password: <span id="password">Loading...</span></p>
+</div>
+
+
 <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
@@ -118,8 +135,174 @@
             el: ".swiper-pagination",
         },
     });
-</script>
 
+
+    document.addEventListener("DOMContentLoaded", async e => {
+        try {
+            const accessToken = window.localStorage.getItem("accessToken")
+
+            if(accessToken) {
+                const response = await fetch("/auth/sign-in", {
+                    method: "Get",
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`
+                    }
+                })
+
+                console.log(response)
+            }
+        } catch(error) {
+            console.log(error.message)
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", async () => {
+        try {
+            const accessToken = window.localStorage.getItem("accessToken");
+            if (accessToken) {
+                const response = await fetch("/auth/balance", {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`
+                    }
+                });
+                const data = await response.json();
+                if (data && data.balance !== undefined) {
+                    document.getElementById("balance").textContent = `Balance: ${data.balance}`;
+                } else {
+                    document.getElementById("balance").textContent = "Balance not available";
+                }
+            } else {
+                document.getElementById("balance").textContent = "Token not available";
+            }
+        } catch (error) {
+            console.log("Error fetching balance:", error.message);
+            document.getElementById("balance").textContent = "Error fetching balance";
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", async () => {
+        try {
+            const accessToken = window.localStorage.getItem("accessToken");
+            if (accessToken) {
+                const response = await fetch("/auth/id", {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`
+                    }
+                });
+                const data = await response.json();
+                if (data && data.id !== undefined) {
+                    document.getElementById("id").textContent = `id: ${data.id}`;
+                } else {
+                    document.getElementById("id").textContent = "Id not available";
+                }
+            } else {
+                document.getElementById("id").textContent = "Token not available";
+            }
+        } catch (error) {
+            console.log("Error fetching id:", error.message);
+            document.getElementById("id").textContent = "Error fetching id";
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", async () => {
+        try {
+            const accessToken = window.localStorage.getItem("accessToken");
+            if (accessToken) {
+                const response = await fetch("/auth/username", {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`
+                    }
+                });
+                const data = await response.json();
+                if (data && data.username !== undefined) {
+                    document.getElementById("username").textContent = `username: ${data.username}`;
+                } else {
+                    document.getElementById("username").textContent = "username not available";
+                }
+            } else {
+                document.getElementById("username").textContent = "Token not available";
+            }
+        } catch (error) {
+            console.log("Error fetching username:", error.message);
+            document.getElementById("username").textContent = "Error fetching id";
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", async () => {
+        try {
+            const accessToken = window.localStorage.getItem("accessToken");
+            if (accessToken) {
+                const response = await fetch("/auth/password", {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`
+                    }
+                });
+                const data = await response.json();
+                if (data && data.password !== undefined) {
+                    document.getElementById("password").textContent = `password: ${data.password}`;
+                } else {
+                    document.getElementById("password").textContent = "password not available";
+                }
+            } else {
+                document.getElementById("password").textContent = "Token not available";
+            }
+        } catch (error) {
+            console.log("Error fetching password:", error.message);
+            document.getElementById("password").textContent = "Error fetching password";
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", async () => {
+        try {
+            let accessToken = window.localStorage.getItem("accessToken");
+
+            // Если токен не доступен или истек срок его действия, запросить новый токен
+            if (!accessToken || isTokenExpired(accessToken)) {
+                const refreshToken = window.localStorage.getItem("refreshToken");
+
+                // Отправить запрос на обновление токена
+                const response = await fetch("/auth/refresh-token", {
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${refreshToken}`
+                    }
+                });
+
+                const data = await response.json();
+                if (data && data.accessToken) {
+                    // Сохранить новый access token в локальном хранилище
+                    window.localStorage.setItem("accessToken", data.accessToken);
+                    accessToken = data.accessToken;
+                } else {
+                    // Если не удалось получить новый токен, перенаправить на страницу входа
+                    window.location.href = "/auth/sign-in";
+                    return;
+                }
+            }
+
+            // Использовать токен для запросов к серверу
+            const response = await fetch("/auth/username", {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            });
+            const userData = await response.json();
+            if (userData && userData.username !== undefined) {
+                document.getElementById("username").textContent = `Username: ${userData.username}`;
+            } else {
+                document.getElementById("username").textContent = "Username not available";
+            }
+        } catch (error) {
+            console.log("Error fetching username:", error.message);
+            document.getElementById("username").textContent = "Error fetching username";
+        }
+    });
+</script>
 </body>
 </html>
 
