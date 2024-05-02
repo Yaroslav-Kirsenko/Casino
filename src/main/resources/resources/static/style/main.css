@@ -1,0 +1,275 @@
+
+/*body {*/
+/*    display: flex;*/
+/*    background: #0c1022;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    min-height: 100vh;*/
+/*    overflow: hidden;*/
+/*    overflow-y: auto; !* Добавлено для вертикальной полосы прокрутки *!*/
+/*}*/
+
+html,
+body {
+    position: relative;
+    height: 100%;
+}
+
+body {
+    background: #0c1022;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+    margin: 0;
+    padding: 0;
+}
+
+.swiper {
+    top: 5px;
+    width: 70%;
+    height: 35%;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.icons-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1; /* Поверх слайдера */
+}
+
+.profile-icon {
+    display: block;      /*блочить*/
+    position: relative; /* Оставляем relative */
+    top: 170px; /* Увеличиваем отступ от верхнего края */
+    left: 20px; /* Изменяем отступ слева */
+    width: 50px; /* Уменьшаем ширину иконки */
+    height: auto; /* Автоматическая высота */
+    z-index: 1; /* Поверх слайдера */
+}
+.profile-icon img {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+}
+
+.profile-text {
+    color: #fff;
+    font-size: 14px;
+    display: block;      /*блочить*/
+    position: relative; /* Оставляем relative */
+    top: 145px; /* Увеличиваем отступ от верхнего края */
+    left: 70px; /* Изменяем отступ слева */
+    width: 50px; /* Уменьшаем ширину иконки */
+    height: auto; /* Автоматическая высота */
+    z-index: 1; /* Поверх слайдера */
+}
+
+.logo {
+    position: fixed;
+    top: 5px;
+    left: 15px; /* Отступ слева */
+    width: 150px; /* Ширина логотипа */
+    height: auto; /* Автоматическая высота */
+    z-index: 1; /* Поверх слайдера */
+}
+.game-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.game {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    background-size: cover;
+}
+
+.game img {
+    width: 100%;
+    height: auto;
+}
+
+.game:hover {
+    transform: scale(1.05);
+}
+
+.game-container {
+    position: relative; /* Добавляем относительное позиционирование */
+    z-index: 1; /* Устанавливаем z-index для текста "Our Games" */
+}
+
+.game-container h2 {
+    color: #fff; /* Белый цвет текста */
+    position: absolute; /* Абсолютное позиционирование */
+    top: -50px; /* Отступ сверху */
+    left: 50%; /* Позиционируем по центру */
+    transform: translateX(-50%); /* Центрируем горизонтально */
+}
+
+
+.game1-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.game1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    background-size: cover;
+}
+
+.game1 img {
+    width: 100%;
+    height: auto;
+}
+
+.game1:hover {
+    transform: scale(1.05);
+}
+
+.game1-container {
+    position: relative; /* Добавляем относительное позиционирование */
+    z-index: 1; /* Устанавливаем z-index для текста "Our Games" */
+}
+
+.game1-container h2 {
+    color: #fff; /* Белый цвет текста */
+    position: absolute; /* Абсолютное позиционирование */
+    top: -50px; /* Отступ сверху */
+    left: 50%; /* Позиционируем по центру */
+    transform: translateX(-50%); /* Центрируем горизонтально */
+}
+
+.game2-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.game2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    background-size: cover;
+}
+
+.game2 img {
+    width: 100%;
+    height: auto;
+}
+
+.game2:hover {
+    transform: scale(1.05);
+}
+
+.game2-container {
+    position: relative; /* Добавляем относительное позиционирование */
+    z-index: 1; /* Устанавливаем z-index для текста "Our Games" */
+}
+
+.game2-container h2 {
+    color: #fff; /* Белый цвет текста */
+    position: absolute; /* Абсолютное позиционирование */
+    top: -50px; /* Отступ сверху */
+    left: 50%; /* Позиционируем по центру */
+    transform: translateX(-50%); /* Центрируем горизонтально */
+}
+
+.game-container.top {
+    position: absolute;
+    top: 400px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+.game1-container.bottom {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.game2-container.last {
+    position: absolute;
+    top: 1000px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.logout-container {
+    position: fixed;
+    top: 20px;
+    right: 10px;
+    z-index: 100; /* Чтобы кнопка была поверх других элементов */
+}
+
+.logout-btn {
+    padding: 10px 20px;
+    background-color: #ffffff; /* Цвет кнопки по умолчанию */
+    color: black; /* Цвет текста */
+    border: none;
+    border-radius: 5px;
+    text-decoration: none; /* Убираем подчеркивание ссылки */
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Анимация изменения цвета */
+}
+
+.logout-btn:hover {
+    background-color: red; /* Цвет кнопки при наведении */
+}
+
+.balance-container {
+    float: left; /* Float the container to the left */
+    margin-right: 20px; /* Add some right margin for spacing */
+    color: white;
+}
