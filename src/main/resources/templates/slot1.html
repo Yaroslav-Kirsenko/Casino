@@ -49,10 +49,6 @@
     <div id="winimage">
         <img id="winline" src="../static/style/img/game1/winline.png">
     </div>
-
-    <div class="balance-container">
-        <p>Your balance: <span id="balance">Loading...</span></p>
-    </div>
 </div>
 
 
@@ -60,41 +56,20 @@
 </body>
 <script src="../static/js/Slot/slot1/slot1.js"></script>
 <script>
-    document.addEventListener("DOMContentLoaded", async e => {
-        try {
-            const accessToken = window.localStorage.getItem("accessToken")
 
-            if(accessToken) {
-                const response = await fetch("/auth/sign-in", {
-                    method: "Get",
-                    headers: {
-                        'Authorization': `Bearer ${accessToken}`
-                    }
-                })
-
-                console.log(response)
-            }
-        } catch(error) {
-            console.log(error.message)
-        }
-    });
 
     document.addEventListener("DOMContentLoaded", async () => {
         try {
             const accessToken = window.localStorage.getItem("accessToken");
             if (accessToken) {
-                const response = await fetch("/auth/balance", {
-                    method: "GET",
+                const response = await fetch("/main", {
+                    method: "POST",
                     headers: {
                         Authorization: `Bearer ${accessToken}`
                     }
                 });
-                const data = await response.json();
-                if (data && data.balance !== undefined) {
-                    document.getElementById("balance").textContent = `Balance: ${data.balance}`;
-                } else {
-                    document.getElementById("balance").textContent = "Balance not available";
-                }
+                const data = await response.text();
+                document.getElementById("balance").textContent = data;
             } else {
                 document.getElementById("balance").textContent = "Token not available";
             }
@@ -103,6 +78,7 @@
             document.getElementById("balance").textContent = "Error fetching balance";
         }
     });
+
 </script>
 
 </html>

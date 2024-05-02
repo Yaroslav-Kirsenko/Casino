@@ -2,14 +2,14 @@
     "use strict";
 
     const items = [
-        { name: "static/style/img/game1/apple.png", weight: 6, value: 15 },
-        { name: "static/style/img/game1/cherry.png", weight: 4, value: 50 },
-        { name: "static/style/img/game1/grape.png", weight: 8, value: 10 },
-        { name: "static/style/img/game1/banana.png", weight: 8, value: 10 },
-        { name: "static/style/img/game1/lemon.png", weight: 6, value: 25 },
-        { name: "static/style/img/game1/orange.png", weight: 8, value: 10 },
-        { name: "static/style/img/game1/watermellon.png", weight: 6, value: 20 },
-        { name: "static/style/img/game1/bar.png", weight: 1, value: 100 }
+        { name: "../static/style/img/game1/apple.png", weight: 6, value: 15 },
+        { name: "../static/style/img/game1/cherry.png", weight: 4, value: 50 },
+        { name: "../static/style/img/game1/grape.png", weight: 8, value: 10 },
+        { name: "../static/style/img/game1/banana.png", weight: 8, value: 10 },
+        { name: "../static/style/img/game1/lemon.png", weight: 6, value: 25 },
+        { name: "../static/style/img/game1/orange.png", weight: 8, value: 10 },
+        { name: "../static/style/img/game1/watermellon.png", weight: 6, value: 20 },
+        { name: "../static/style/img/game1/bar.png", weight: 1, value: 100 }
     ];
 
     const reels = document.querySelectorAll(".reel");
@@ -19,40 +19,43 @@
 
     const saldoElement = document.getElementById("saldo");
     const valorElement = document.getElementById("valor");
-    let saldo = 100;
+    let saldo = 0; // Баланс будет получен из сервера
     let valor = 10;
 
-    saldoElement.textContent = `Saldo: $${saldo}`;
+    async function fetchBalance() {
+        try {
+            const accessToken = window.localStorage.getItem("accessToken");
+            if (!accessToken) {
+                console.error("Access token not available");
+                return;
+            }
+
+            const response = await fetch("/main", {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to fetch balance");
+            }
+
+            const data = await response.text();
+            saldo = parseInt(data);
+            saldoElement.textContent = `Saldo: $${saldo}`;
+        } catch (error) {
+            console.log("Error fetching balance:", error.message);
+            saldoElement.textContent = "Error fetching balance";
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", fetchBalance);
+
     valorElement.textContent = `Valor: $${valor}`;
 
     const winImage = document.getElementById("winimage");
     const startButton = document.querySelector("#start");
-
-    async function updateBalance(username, amount) {
-        try {
-            const response = await fetch('/slot1', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    username: username,
-                    amount: amount
-                })
-            });
-
-            const data = await response.json();
-            console.log(data); // Опционально: выводите ответ сервера для отладки
-        } catch (error) {
-            console.error('Error updating balance:', error);
-        }
-    }
-
-    function getUsername() {
-        // Логіка отримання імені користувача з форми або з LocalStorage
-        // Наприклад, якщо ім'я користувача зберігається в полі з id="usernameInput"
-        return document.getElementById("usernameInput").value;
-    }
 
     startButton.addEventListener("click", async function () {
         valor = 10;
@@ -60,6 +63,12 @@
         winImage.style.display = "none";
         init();
         await spin();
+
+        // Получите новый баланс с сервера
+        await fetchBalance();
+
+        // Отправьте новый баланс на сервер для обновления
+        await updateBalance(saldo);
     });
 
     async function spin() {
@@ -71,19 +80,22 @@
             await new Promise((resolve) => setTimeout(resolve, duration * 100));
         }
 
-        const username = getUsername();
-
         if (lastItems[0].name !== null && lastItems.every(item => item.name === lastItems[0].name)) {
             setTimeout(() => {
                 intervalBlink = setInterval(blinkLine, 500);
             }, 1000);
 
-            const amount = lastItems[0].value;
-            await updateBalance(username, amount);
+            valor = lastItems[0].value;
+            saldo += valor;
         } else {
-            const amount = -10; // Здесь указываете отрицательное значение, если игрок проиграл
-            await updateBalance(username, amount);
+            saldo -= valor;
         }
+
+        saldoElement.textContent = `Saldo: $${saldo}`;
+        valorElement.textContent = `Valor: $${valor}`;
+
+        // Отправьте новый баланс на сервер для обновления
+        await updateBalance(saldo);
     }
 
     function blinkLine() {
@@ -108,7 +120,7 @@
             const squaresClone = squares.cloneNode(false);
 
             const pool = [
-                { name: "static/style/img/game1/start.png", weight: null }
+                { name: "../static/style/img/game1/start.png", weight: null }
             ];
 
             if (!firstInit) {
@@ -149,8 +161,7 @@
                 const box = document.createElement("div");
                 box.classList.add("box");
                 box.style.width = reel.clientWidth + "px";
-                box.style.height = reel
-                    .clientHeight + "px";
+                box.style.height = reel.clientHeight + "px";
 
                 const img = document.createElement("img");
                 img.src = pool[j].name;
@@ -163,7 +174,6 @@
             squaresClone.style.transform = `translateY(-${reel.clientHeight * (pool.length - 1)}px)`;
             reel.replaceChild(squaresClone, squares);
         }
-
     }
 
     function weightedRandom(remainingItems, remainingWeights) {
@@ -206,9 +216,37 @@
         playButton.disabled = true;
         setTimeout(() => {
             playButton.disabled = false;
-        }, 1000); // Задержка в 1000 мс (1 секунда)
+        }, 1000);
     });
 
     init();
 
+    // Добавленный код для автоматического обновления баланса
+    async function updateBalance(newBalance) {
+        try {
+            const accessToken = window.localStorage.getItem("accessToken");
+            if (!accessToken) {
+                console.error("Access token not available");
+                return;
+            }
+
+            const response = await fetch("/update-balance", {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(newBalance) // Здесь изменение
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to update balance");
+            }
+
+            const data = await response.text();
+            console.log(data); // Logging server response
+        } catch (error) {
+            console.log("Error updating balance:", error.message);
+        }
+    }
 })();

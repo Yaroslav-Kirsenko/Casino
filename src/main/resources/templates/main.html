@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +9,12 @@
 </head>
 <body>
 <div class="icons-container">
-<a  class="logo" data-testid="logoLink" href="/main">
-    <img alt="logo" class="logo" src="/video/img/logo.png">
-</a>
-<a class="profile-icon" href="/profile">
-    <img src="/video/img/profile.png" alt="Profile Icon">
-</a>
+    <a  class="logo" data-testid="logoLink" href="/main">
+        <img alt="logo" class="logo" src="/video/img/logo.png">
+    </a>
+    <a class="profile-icon" href="/profile">
+        <img src="/video/img/profile.png" alt="Profile Icon">
+    </a>
     <a class ="profile-text" href="/profile">Profile</a>
 
     <a class="profile-icon" href="/crash1">
@@ -38,7 +38,7 @@
 <div class="game-container top">
     <h2>Slot Games</h2>
     <div class="game">
-<!--        <img src="../static/video/img/slot1.png" alt="Game 1">-->
+        <!--        <img src="../static/video/img/slot1.png" alt="Game 1">-->
         <a href="/slot1">
             <img  alt="Game 1" src="/video/img/slot1.png">
         </a>
@@ -46,14 +46,14 @@
 
     <div class="game">
         <a href="/slot2">
-        <img  alt="Game 2" src="/video/img/test.png">
-    </a>
+            <img  alt="Game 2" src="/video/img/test.png">
+        </a>
     </div>
 
     <div class="game">
         <a href="/slot3">
-        <img  alt="Game 3" src="/video/img/test.png">
-    </a>
+            <img  alt="Game 3" src="/video/img/test.png">
+        </a>
     </div>
     <!-- Add more games as needed -->
 </div>
@@ -104,25 +104,15 @@
     <!-- Add more games as needed -->
 </div>
 
+<div class="balance-container">
+    <p>Your balance: <span id="balance"></span></p>
+</div>
+
 <div class="logout-container">
     <a class="logout-btn" href="/">Log Out</a>
 </div>
 
-<div class="balance-container">
-    <p>Your balance: <span id="balance">Loading...</span></p>
-</div>
 
-<div class="balance-container">
-    <p>Your id: <span id="id">Loading...</span></p>
-</div>
-
-<div class="balance-container">
-    <p>Your username: <span id="username">Loading...</span></p>
-</div>
-
-<div class="balance-container">
-    <p>Your password: <span id="password">Loading...</span></p>
-</div>
 
 
 <!-- Swiper JS -->
@@ -156,22 +146,19 @@
         }
     });
 
+
     document.addEventListener("DOMContentLoaded", async () => {
         try {
             const accessToken = window.localStorage.getItem("accessToken");
             if (accessToken) {
-                const response = await fetch("/auth/balance", {
-                    method: "GET",
+                const response = await fetch("/main", {
+                    method: "POST",
                     headers: {
                         Authorization: `Bearer ${accessToken}`
                     }
                 });
-                const data = await response.json();
-                if (data && data.balance !== undefined) {
-                    document.getElementById("balance").textContent = `Balance: ${data.balance}`;
-                } else {
-                    document.getElementById("balance").textContent = "Balance not available";
-                }
+                const data = await response.text();
+                document.getElementById("balance").textContent = data;
             } else {
                 document.getElementById("balance").textContent = "Token not available";
             }
@@ -181,127 +168,82 @@
         }
     });
 
-    document.addEventListener("DOMContentLoaded", async () => {
-        try {
-            const accessToken = window.localStorage.getItem("accessToken");
-            if (accessToken) {
-                const response = await fetch("/auth/id", {
-                    method: "GET",
-                    headers: {
-                        Authorization: `Bearer ${accessToken}`
-                    }
-                });
-                const data = await response.json();
-                if (data && data.id !== undefined) {
-                    document.getElementById("id").textContent = `id: ${data.id}`;
-                } else {
-                    document.getElementById("id").textContent = "Id not available";
-                }
-            } else {
-                document.getElementById("id").textContent = "Token not available";
-            }
-        } catch (error) {
-            console.log("Error fetching id:", error.message);
-            document.getElementById("id").textContent = "Error fetching id";
-        }
-    });
+    //
+    // document.addEventListener("DOMContentLoaded", async () => {
+    //     try {
+    //         const accessToken = window.localStorage.getItem("accessToken");
+    //         if (accessToken) {
+    //             const response = await fetch("/auth/id", {
+    //                 method: "GET",
+    //                 headers: {
+    //                     Authorization: `Bearer ${accessToken}`
+    //                 }
+    //             });
+    //             const data = await response.json();
+    //             if (data && data.id !== undefined) {
+    //                 document.getElementById("id").textContent = `id: ${data.id}`;
+    //             } else {
+    //                 document.getElementById("id").textContent = "Id not available";
+    //             }
+    //         } else {
+    //             document.getElementById("id").textContent = "Token not available";
+    //         }
+    //     } catch (error) {
+    //         console.log("Error fetching id:", error.message);
+    //         document.getElementById("id").textContent = "Error fetching id";
+    //     }
+    // });
+    //
+    // document.addEventListener("DOMContentLoaded", async () => {
+    //     try {
+    //         const accessToken = window.localStorage.getItem("accessToken");
+    //         if (accessToken) {
+    //             const response = await fetch("/auth/username", {
+    //                 method: "GET",
+    //                 headers: {
+    //                     Authorization: `Bearer ${accessToken}`
+    //                 }
+    //             });
+    //             const data = await response.json();
+    //             if (data && data.username !== undefined) {
+    //                 document.getElementById("username").textContent = `username: ${data.username}`;
+    //             } else {
+    //                 document.getElementById("username").textContent = "username not available";
+    //             }
+    //         } else {
+    //             document.getElementById("username").textContent = "Token not available";
+    //         }
+    //     } catch (error) {
+    //         console.log("Error fetching username:", error.message);
+    //         document.getElementById("username").textContent = "Error fetching id";
+    //     }
+    // });
+    //
+    // document.addEventListener("DOMContentLoaded", async () => {
+    //     try {
+    //         const accessToken = window.localStorage.getItem("accessToken");
+    //         if (accessToken) {
+    //             const response = await fetch("/auth/password", {
+    //                 method: "GET",
+    //                 headers: {
+    //                     Authorization: `Bearer ${accessToken}`
+    //                 }
+    //             });
+    //             const data = await response.json();
+    //             if (data && data.password !== undefined) {
+    //                 document.getElementById("password").textContent = `password: ${data.password}`;
+    //             } else {
+    //                 document.getElementById("password").textContent = "password not available";
+    //             }
+    //         } else {
+    //             document.getElementById("password").textContent = "Token not available";
+    //         }
+    //     } catch (error) {
+    //         console.log("Error fetching password:", error.message);
+    //         document.getElementById("password").textContent = "Error fetching password";
+    //     }
+    // });
 
-    document.addEventListener("DOMContentLoaded", async () => {
-        try {
-            const accessToken = window.localStorage.getItem("accessToken");
-            if (accessToken) {
-                const response = await fetch("/auth/username", {
-                    method: "GET",
-                    headers: {
-                        Authorization: `Bearer ${accessToken}`
-                    }
-                });
-                const data = await response.json();
-                if (data && data.username !== undefined) {
-                    document.getElementById("username").textContent = `username: ${data.username}`;
-                } else {
-                    document.getElementById("username").textContent = "username not available";
-                }
-            } else {
-                document.getElementById("username").textContent = "Token not available";
-            }
-        } catch (error) {
-            console.log("Error fetching username:", error.message);
-            document.getElementById("username").textContent = "Error fetching id";
-        }
-    });
-
-    document.addEventListener("DOMContentLoaded", async () => {
-        try {
-            const accessToken = window.localStorage.getItem("accessToken");
-            if (accessToken) {
-                const response = await fetch("/auth/password", {
-                    method: "GET",
-                    headers: {
-                        Authorization: `Bearer ${accessToken}`
-                    }
-                });
-                const data = await response.json();
-                if (data && data.password !== undefined) {
-                    document.getElementById("password").textContent = `password: ${data.password}`;
-                } else {
-                    document.getElementById("password").textContent = "password not available";
-                }
-            } else {
-                document.getElementById("password").textContent = "Token not available";
-            }
-        } catch (error) {
-            console.log("Error fetching password:", error.message);
-            document.getElementById("password").textContent = "Error fetching password";
-        }
-    });
-
-    document.addEventListener("DOMContentLoaded", async () => {
-        try {
-            let accessToken = window.localStorage.getItem("accessToken");
-
-            // Если токен не доступен или истек срок его действия, запросить новый токен
-            if (!accessToken || isTokenExpired(accessToken)) {
-                const refreshToken = window.localStorage.getItem("refreshToken");
-
-                // Отправить запрос на обновление токена
-                const response = await fetch("/auth/refresh-token", {
-                    method: "POST",
-                    headers: {
-                        Authorization: `Bearer ${refreshToken}`
-                    }
-                });
-
-                const data = await response.json();
-                if (data && data.accessToken) {
-                    // Сохранить новый access token в локальном хранилище
-                    window.localStorage.setItem("accessToken", data.accessToken);
-                    accessToken = data.accessToken;
-                } else {
-                    // Если не удалось получить новый токен, перенаправить на страницу входа
-                    window.location.href = "/auth/sign-in";
-                    return;
-                }
-            }
-
-            // Использовать токен для запросов к серверу
-            const response = await fetch("/auth/username", {
-                method: "GET",
-                headers: {
-                    Authorization: `Bearer ${accessToken}`
-                }
-            });
-            const userData = await response.json();
-            if (userData && userData.username !== undefined) {
-                document.getElementById("username").textContent = `Username: ${userData.username}`;
-            } else {
-                document.getElementById("username").textContent = "Username not available";
-            }
-        } catch (error) {
-            console.log("Error fetching username:", error.message);
-            document.getElementById("username").textContent = "Error fetching username";
-        }
-    });
 </script>
 </body>
 </html>
