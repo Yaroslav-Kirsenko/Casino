@@ -1,33 +1,55 @@
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
 
-/*body {*/
-/*    display: flex;*/
-/*    background: #0c1022;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    min-height: 100vh;*/
-/*    overflow: hidden;*/
-/*    overflow-y: auto; !* Добавлено для вертикальной полосы прокрутки *!*/
-/*}*/
+h1,h2,h3,h4,h5,h6 {
+    font-size: 16px;
+    font-weight: 400;
+    padding: 0;
+    margin: 0;
+}
 
-html,
-body {
-    position: relative;
-    height: 100%;
+a {
+    text-decoration: none;
 }
 
 body {
-    background: #0c1022;
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    color: #000;
-    margin: 0;
-    padding: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.background {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+.background img {
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .swiper {
-    top: 5px;
-    width: 70%;
-    height: 35%;
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    opacity: 0;
+    transition: opacity .4s;
+}
+.swiper.view {
+    opacity: 1;
 }
 
 .swiper-slide {
@@ -46,224 +68,246 @@ body {
     object-fit: cover;
 }
 
-.icons-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1; /* Поверх слайдера */
+.swiper-pagination {
+    transform: translateY(10px);
+    opacity: 0;
+    transition: opacity .3s, transform .3s;
+}
+.swiper:hover .swiper-pagination {
+    transform: translateY(0);
+    opacity: 1;
+}
+.swiper-pagination-bullet {
+    background-color: #FF6B2C;
+    opacity: 1;
+    transition: all .3s;
+}
+.swiper-pagination-bullet-active {
+    width: 16px;
+    border-radius: 4px;
 }
 
-.profile-icon {
-    display: block;      /*блочить*/
-    position: relative; /* Оставляем relative */
-    top: 170px; /* Увеличиваем отступ от верхнего края */
-    left: 20px; /* Изменяем отступ слева */
-    width: 50px; /* Уменьшаем ширину иконки */
-    height: auto; /* Автоматическая высота */
-    z-index: 1; /* Поверх слайдера */
-}
-.profile-icon img {
-    max-width: 100%;
-    width: 100%;
-    height: auto;
-}
-
-.profile-text {
-    color: #fff;
-    font-size: 14px;
-    display: block;      /*блочить*/
-    position: relative; /* Оставляем relative */
-    top: 145px; /* Увеличиваем отступ от верхнего края */
-    left: 70px; /* Изменяем отступ слева */
-    width: 50px; /* Уменьшаем ширину иконки */
-    height: auto; /* Автоматическая высота */
-    z-index: 1; /* Поверх слайдера */
-}
-
-.logo {
-    position: fixed;
-    top: 5px;
-    left: 15px; /* Отступ слева */
-    width: 150px; /* Ширина логотипа */
-    height: auto; /* Автоматическая высота */
-    z-index: 1; /* Поверх слайдера */
-}
-.game-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-top: 20px;
-}
-
-.game {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 200px;
-    height: 200px;
-    margin: 10px;
-    border: 1px solid #fff;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-    background-size: cover;
-}
-
-.game img {
-    width: 100%;
-    height: auto;
-}
-
-.game:hover {
-    transform: scale(1.05);
-}
-
-.game-container {
-    position: relative; /* Добавляем относительное позиционирование */
-    z-index: 1; /* Устанавливаем z-index для текста "Our Games" */
-}
-
-.game-container h2 {
-    color: #fff; /* Белый цвет текста */
-    position: absolute; /* Абсолютное позиционирование */
-    top: -50px; /* Отступ сверху */
-    left: 50%; /* Позиционируем по центру */
-    transform: translateX(-50%); /* Центрируем горизонтально */
-}
-
-
-.game1-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-top: 20px;
-}
-
-.game1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 200px;
-    height: 200px;
-    margin: 10px;
-    border: 1px solid #fff;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-    background-size: cover;
-}
-
-.game1 img {
-    width: 100%;
-    height: auto;
-}
-
-.game1:hover {
-    transform: scale(1.05);
-}
-
-.game1-container {
-    position: relative; /* Добавляем относительное позиционирование */
-    z-index: 1; /* Устанавливаем z-index для текста "Our Games" */
-}
-
-.game1-container h2 {
-    color: #fff; /* Белый цвет текста */
-    position: absolute; /* Абсолютное позиционирование */
-    top: -50px; /* Отступ сверху */
-    left: 50%; /* Позиционируем по центру */
-    transform: translateX(-50%); /* Центрируем горизонтально */
-}
-
-.game2-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-top: 20px;
-}
-
-.game2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 200px;
-    height: 200px;
-    margin: 10px;
-    border: 1px solid #fff;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-    background-size: cover;
-}
-
-.game2 img {
-    width: 100%;
-    height: auto;
-}
-
-.game2:hover {
-    transform: scale(1.05);
-}
-
-.game2-container {
-    position: relative; /* Добавляем относительное позиционирование */
-    z-index: 1; /* Устанавливаем z-index для текста "Our Games" */
-}
-
-.game2-container h2 {
-    color: #fff; /* Белый цвет текста */
-    position: absolute; /* Абсолютное позиционирование */
-    top: -50px; /* Отступ сверху */
-    left: 50%; /* Позиционируем по центру */
-    transform: translateX(-50%); /* Центрируем горизонтально */
-}
-
-.game-container.top {
-    position: absolute;
-    top: 400px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
-}
-
-.game1-container.bottom {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;
-}
-
-.game2-container.last {
-    position: absolute;
-    top: 1000px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;
-}
-
-.logout-container {
-    position: fixed;
-    top: 20px;
-    right: 10px;
-    z-index: 100; /* Чтобы кнопка была поверх других элементов */
-}
-
-.logout-btn {
-    padding: 10px 20px;
-    background-color: #ffffff; /* Цвет кнопки по умолчанию */
-    color: black; /* Цвет текста */
+.swiper-button-prev,
+.swiper-button-next {
+    background-color: transparent;
     border: none;
-    border-radius: 5px;
-    text-decoration: none; /* Убираем подчеркивание ссылки */
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Анимация изменения цвета */
 }
 
-.logout-btn:hover {
-    background-color: red; /* Цвет кнопки при наведении */
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    color: #FF6B2C;
+}
+
+.swiper-button-prev {
+    transform: translateX(-30px);
+    opacity: 0;
+    transition: opacity .3s, transform .3s;
+}
+.swiper-button-next {
+    transform: translateX(30px);
+    opacity: 0;
+    transition: opacity .3s, transform .3s;
+}
+
+.swiper:hover .swiper-navigation .swiper-button-prev {
+    transform: translateX(0);
+    opacity: 1;
+}
+.swiper:hover .swiper-navigation .swiper-button-next {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 1400px;
+    padding: 0 30px;
+    background-color: #090c23da;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    height: 100%;
+}
+
+.header{
+    background-color: #11112b;
+    border-radius: 16px;
+    height: 100px;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: opacity .2s, transform .4s;
+}
+.header.view {
+    transform: translateY(0);
+    opacity: 1;
+}
+.header__logo {
+    display: block;
+    flex: 0 0 auto;
+    height: 100%;
+    transform: scale(1);
+    transition: transform .3s;
+}
+.header__logo:hover {
+    transform: scale(1.05);
+}
+.header__logo img {
+    max-width: 100%;
+    max-height: 100%;
+}
+.header__buttons {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+.header__profile-wrapper {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header__profile {
+    display: block;
+    height: 50px;
+    width: 50px;
+    overflow: hidden;
+}
+.header__profile img {
+    max-height: 100%;
+    width: 100%;
+    height: 100%;
+    object-position: center center;
+    object-fit: cover;
+}
+.header__profile-modal {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #1E1B39;
+    padding: 16px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+    transform: translateY(-50px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s, transform .3s;
+    z-index: 100;
+}
+.header__profile-wrapper:hover .header__profile-modal {
+    opacity: 1;
+    transform: translateY(-10px);
+    pointer-events: all;
+}
+.header__profile-cabinet {
+    font-size: 24px;
+    color: #FEFEFF;
+}
+.header__button.button {
+    padding: 8px 10px;
+    font-size: 14px;
+}
+
+.button {
+    display: block;
+    position: relative;
+    background: rgb(169,130,251);
+    background: linear-gradient(150deg, rgba(169,130,251,1) 0%, rgba(98,32,238,1) 42%);
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: 1px solid rgb(133, 87, 233);
+    color: #FEFEFF;
+    transform: scale(1);
+    transition: opacity .3s, transform .3s;
+    text-align: center;
+    white-space: nowrap;
+}
+.button:hover {
+    opacity: .8;
+    transform: scale(1.1);
+}
+.button:active {
+    opacity: 1;
+    transform: scale(1);
+}
+.header__balance {}
+.balance {
+    display: block;
+    position: relative;
+    border: 1px solid #1E1B39;
+    padding: 12px 24px;
+    border-radius: 8px;
+    color: #FEFEFF;
+    background: rgb(255,107,44);
+    background: linear-gradient(45deg, rgba(255,107,44,1) 0%, rgba(255,255,255,0) 42%);
+}
+.balance span {
+    font-size: 18px;
+    font-weight: 600;
+}
+.header__crash {
+    height: 50px;
+    width: 50px;
+    transform: scale(1);
+    transition: transform .3s;
+}
+.header__crash:hover {
+    transform: scale(1.05);
+}
+.header__crash img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.game__container {}
+.game__container:not(:last-child) {
+    margin-bottom: 30px;
+}
+.game__title {
+    font-size: 32px;
+    font-weight: 600;
+    color: #FEFEFF;
+    margin-bottom: 16px;
+    transform: translateX(50px);
+    opacity: 0;
+    transition: opacity .1s, transform .3s;
+}
+.game__container.view .game__title {
+    opacity: 1;
+    transform: translateX(0);
+}
+.game__links {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 30px;
+    width: 100%;
+    opacity: 0;
+    transition: opacity .3s;
+}
+.game__container.view .game__links {
+    opacity: 1;
+}
+.game__link {
+    display: block;
+    border-radius: 16px;
+    overflow: hidden;
+    transform: scale(1);
+    transition: transform .3s;
+}
+.game__link:hover {
+    transform: scale(1.05);
+}
+.game__link img {
+    width: 100%;
+    height: 100%;
 }
