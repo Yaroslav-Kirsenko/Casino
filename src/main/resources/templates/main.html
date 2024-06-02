@@ -21,7 +21,23 @@
                 </a>
                 
                 <div class="header__buttons logout-container">
-                    <p class="header__balance balance">Your balance: <span id="balance">1200 USDT</span></p>
+                    <div class="header__balance balance value">
+                        <div class="header__balance-wrapper">
+                            <p class="header__balance-value">Your balance: <span id="balance">1200 USDT</span></p>
+                            <button class="header__set-balance">
+                                <img alt="plus icon" src="/video/img/plus-sign.png">
+                            </button>
+                        </div>
+                        <form class="header__balance-form" action="#">
+                            <div class="header__balance-input">
+                                <input type="number" placeholder="Set your balance" />
+                            </div>
+                            <button class="header__balance-apply">Ok</button>
+                            <button class="header__balance-close">
+                                <img alt="close icon" src="/video/img/close.png">
+                            </button>
+                        </form>
+                    </div>
                     <div class="header__profile-wrapper">
                         <a class="header__profile" href="/profile">
                             <img src="/video/img/profile.png" alt="Profile icon">
@@ -271,5 +287,6 @@
         }
 
     </script>
+    <script src="/js/setBalance.js"></script>
 </body>
 </html>
