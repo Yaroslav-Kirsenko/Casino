@@ -54,7 +54,8 @@ async function setBalance(balance) {
                     Authorization: `Bearer ${accessToken}`,
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(balance)
+
+                body: JSON.stringify(parseInt(balance))
             })
 
             const data = await response.text();

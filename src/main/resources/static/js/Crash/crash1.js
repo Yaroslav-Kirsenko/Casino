@@ -63,7 +63,7 @@ for (let i = 0; i < 25; i++) {
                 var currentBalance = amount.value * keff[step-1];
                 document.getElementById("take").style.display = "block";
                 document.getElementById("step").innerHTML = "Ваши шаги : " + step;
-                document.getElementById("take").innerHTML = "Забрать " + currentBalance.toFixed(0) + "р";
+                document.getElementById("take").innerHTML = "Забрать " + currentBalance.toFixed(0) + "грн";
             }
         }
         btn.onclick = function(){
